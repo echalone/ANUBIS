@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;ARM32;ARM64</Platforms>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Copyright>Copyright (c) 2024 Markus Szumovski, MIT License</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="USBswitchCmdVersions\Linux\" />
+    <Folder Include="USBswitchCmdVersions\RPiOS32\" />
+    <Folder Include="USBswitchCmdVersions\RPiOS64\" />
+    <Folder Include="USBswitchCmdVersions\Windows\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="USBswitchCmdVersions\RPiOS32\USBswitchCmd" Condition="$(Platform) == 'ARM32'">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <TargetPath>%(Filename)%(Extension)</TargetPath>
+    </None>
+    <None Update="USBswitchCmdVersions\RPiOS64\USBswitchCmd" Condition="$(Platform) == 'ARM64'">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <TargetPath>%(Filename)%(Extension)</TargetPath>
+    </None>
+    <None Update="USBswitchCmdVersions\Windows\USBaccess.dll" Condition="$(Platform) == 'AnyCPU'">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <TargetPath>%(Filename)%(Extension)</TargetPath>
+    </None>
+    <None Update="USBswitchCmdVersions\Windows\USBswitchCmd.exe" Condition="$(Platform) == 'AnyCPU'">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <TargetPath>%(Filename)%(Extension)</TargetPath>
+    </None>
+    <None Update="USBswitchCmdVersions\Windows\USBaccess.dll" Condition="$(Platform) == 'Any CPU'">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>%(Filename)%(Extension)</TargetPath>
+    </None>
+    <None Update="USBswitchCmdVersions\Windows\USBswitchCmd.exe" Condition="$(Platform) == 'Any CPU'">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>%(Filename)%(Extension)</TargetPath>
+    </None>
+  </ItemGroup>
+
+</Project>

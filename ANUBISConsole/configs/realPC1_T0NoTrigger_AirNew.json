@@ -1,0 +1,892 @@
+{
+  "clewareUSBMappings": [
+    {
+      "name": "ANUBIS_USB_Backup",
+      "id": 563239
+    },
+    {
+      "name": "ANUBIS_USB_Primary",
+      "id": 563248
+    },
+    {
+      "name": "ANUBIS_USB_Secondary",
+      "id": 563249
+    }
+  ],
+  "fritzApiSettings": {
+    "baseUrl": "http://fritz.box",
+    "user": "fritz2029",
+    "password": "sommer0174",
+    "autoLogin": true,
+    "checkLoginBeforeCommands": true,
+    "reloadNamesIfNotFound": false,
+    "loginTimeoutSeconds": 8,
+    "commandTimeoutSeconds": 5,
+    "ignoreSSLError": false,
+    "autoRetryOnErrors": true,
+    "autoRetryCount": 2,
+    "autoRetryMinWaitMilliseconds": 700,
+    "autoRetryWaitSpanMilliseconds": 800
+  },
+  "switchApiSettings": {
+    "baseUrl": "https://api.switch-bot.com/",
+    "token": "33a1813627634407129112a8923f378db4e3371d3227309d703fcd7525aa800aacc2707c3380dcdee9e9fe9d907f4d3d",
+    "secret": "e9d1a54c20b5ff4167e491ecf2243398",
+    "reloadNamesIfNotFound": false,
+    "commandTimeoutSeconds": 20,
+    "ignoreSSLError": false,
+    "autoRetryOnErrors": true,
+    "autoRetryCount": 3,
+    "autoRetryMinWaitMilliseconds": 1500,
+    "autoRetryWaitSpanMilliseconds": 3000
+  },
+  "clewareApiSettings": {
+    "usbSwitchCommand_Path": "USBswitchCmd",
+    "usbSwitchCommand_Arguments_List": "-l",
+    "usbSwitchCommand_Arguments_Get": "-n {switch} -R",
+    "usbSwitchCommand_Arguments_SetOn": "-n {switch} 1",
+    "usbSwitchCommand_Arguments_SetOff": "-n {switch} 0",
+    "usbSwitchCommand_Arguments_SetOnSecure": "-n {switch} 1 -s",
+    "usbSwitchCommand_Arguments_SetOffSecure": "-n {switch} 0 -s",
+    "commandTimeoutSeconds": 5,
+    "autoRetryOnErrors": true,
+    "autoRetryCount": 2,
+    "autoRetryMinWaitMilliseconds": 500,
+    "autoRetryWaitSpanMilliseconds": 500
+  },
+  "turnOn": [
+    {
+      "$type": "device",
+      "deviceType": "Fritz",
+      "disableIfNotDiscovered": true,
+      "enabled": true,
+      "id": "ANUBIS_PC_Primary",
+      "waitSecondsAfterTurnOn": 1
+    },
+    {
+      "$type": "device",
+      "deviceType": "Fritz",
+      "disableIfNotDiscovered": true,
+      "enabled": true,
+      "id": "ANUBIS_PC_Secondary",
+      "waitSecondsAfterTurnOn": 1
+    },
+    {
+      "$type": "message",
+      "message": "Manually turn on power switch on power distributor controlled by FingerBot \u0022ANUBIS_FingerBot\u0022 now!",
+      "disableIfNotDiscovered": true,
+      "enabled": true,
+      "id": "ANUBIS_FingerBot_ManuallyTurnOn",
+      "waitSecondsAfterTurnOn": 90
+    },
+    {
+      "$type": "device",
+      "deviceType": "SwitchBot",
+      "disableIfNotDiscovered": true,
+      "enabled": true,
+      "id": "ANUBIS_SwitchBot",
+      "waitSecondsAfterTurnOn": 5
+    },
+    {
+      "$type": "message",
+      "message": "Manually turn back on power switch on power distributor controlled by SwitchBot \u0022ANUBIS_SwitchBot\u0022 now!",
+      "disableIfNotDiscovered": true,
+      "enabled": true,
+      "id": "ANUBIS_SwitchBot_ManuallyTurnBackOn",
+      "waitSecondsAfterTurnOn": 90
+    },
+    {
+      "$type": "device",
+      "deviceType": "Fritz",
+      "disableIfNotDiscovered": true,
+      "enabled": true,
+      "id": "ANUBIS_MainSwitch",
+      "waitSecondsAfterTurnOn": 30
+    },
+    {
+      "$type": "message",
+      "message": "Manually turn on WLAN power plug \u0022ANUBIS_WLANPowerPlug\u0022 that is plugged in into ANUBIS Fritz Main Switch \u0022ANUBIS_MainSwitch\u0022 now!",
+      "disableIfNotDiscovered": true,
+      "enabled": true,
+      "id": "ANUBIS_WLANPowerPlug",
+      "waitSecondsAfterTurnOn": 90
+    },
+    {
+      "$type": "device",
+      "deviceType": "ClewareUSB",
+      "disableIfNotDiscovered": true,
+      "enabled": true,
+      "id": "ANUBIS_USB_Primary",
+      "waitSecondsAfterTurnOn": 50
+    },
+    {
+      "$type": "device",
+      "deviceType": "Fritz",
+      "disableIfNotDiscovered": false,
+      "enabled": true,
+      "id": "ANUBIS_Ventil_AM",
+      "waitSecondsAfterTurnOn": 1
+    },
+    {
+      "$type": "device",
+      "deviceType": "Fritz",
+      "disableIfNotDiscovered": false,
+      "enabled": true,
+      "id": "ANUBIS_Ventil_EB",
+      "waitSecondsAfterTurnOn": 1
+    },
+    {
+      "$type": "message",
+      "message": "Manually turn on WLAN power plug \u0022ANUBIS_WLANAirPower\u0022 that is plugged in into power distributer \u0022ANUBIS Hauptverteiler\u0022 now to turn on air supply!",
+      "disableIfNotDiscovered": true,
+      "enabled": true,
+      "id": "ANUBIS_WLANAirPower",
+      "waitSecondsAfterTurnOn": 30
+    }
+  ],
+  "pollersAndTriggers": {
+    "pollers": [
+      {
+        "$type": "switchBot",
+        "options": {
+          "sleepTimeInMilliseconds": 55000,
+          "alertTimeInMilliseconds": null,
+          "lockTimeoutInMilliseconds": 500,
+          "minPollerCountToArm": 3,
+          "autoSafeMode": true
+        },
+        "switches": [
+          {
+            "enabled": true,
+            "switchName": "ANUBIS_SwitchBot",
+            "armPanicMode": true,
+            "enterSafeMode": true,
+            "markShutDownIfOff": false,
+            "turnOffOnPanic": true,
+            "minBattery": 5,
+            "strictBatteryCheck": false,
+            "stateCheck": true,
+            "strictStateCheck": false,
+            "zeroBatteryIsValidPanic": false,
+            "lockTimeoutInMilliseconds": 500,
+            "safeModeSensitive": true
+          }
+        ],
+        "generalTriggers": [
+          {
+            "panic": [
+              "All"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          }
+        ],
+        "switchTriggers": [
+          {
+            "panic": [
+              "All"
+            ],
+            "id": [
+              "*"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "$type": "fritz",
+        "options": {
+          "sleepTimeInMilliseconds": 20000,
+          "alertTimeInMilliseconds": null,
+          "lockTimeoutInMilliseconds": 500,
+          "minPollerCountToArm": 3,
+          "autoSafeMode": true
+        },
+        "switches": [
+          {
+            "enabled": true,
+            "switchName": "ANUBIS_PC_Primary",
+            "armPanicMode": true,
+            "enterSafeMode": false,
+            "markShutDownIfOff": false,
+            "turnOffOnPanic": false,
+            "lowPowerCutOff": 2900,
+            "turnOffOnLowPower": true,
+            "safeModePowerUpAlarm": 100,
+            "minPowerWarn": null,
+            "maxPowerWarn": null,
+            "minPower": 3100,
+            "maxPower": 35000,
+            "lockTimeoutInMilliseconds": 500,
+            "safeModeSensitive": true
+          },
+          {
+            "enabled": true,
+            "switchName": "ANUBIS_PC_Secondary",
+            "armPanicMode": true,
+            "enterSafeMode": false,
+            "markShutDownIfOff": false,
+            "turnOffOnPanic": false,
+            "lowPowerCutOff": 1600,
+            "turnOffOnLowPower": true,
+            "safeModePowerUpAlarm": 50,
+            "minPowerWarn": null,
+            "maxPowerWarn": null,
+            "minPower": 1700,
+            "maxPower": 8000,
+            "lockTimeoutInMilliseconds": 500,
+            "safeModeSensitive": true
+          },
+          {
+            "enabled": true,
+            "switchName": "ANUBIS_MainSwitch",
+            "armPanicMode": true,
+            "enterSafeMode": true,
+            "markShutDownIfOff": true,
+            "turnOffOnPanic": true,
+            "lowPowerCutOff": 150000,
+            "turnOffOnLowPower": true,
+            "safeModePowerUpAlarm": 1500,
+            "minPowerWarn": 235000,
+            "maxPowerWarn": 800000,
+            "minPower": 215000,
+            "maxPower": 830000,
+            "lockTimeoutInMilliseconds": 500,
+            "safeModeSensitive": true
+          },
+          {
+            "enabled": true,
+            "switchName": "ANUBIS_Ventil_AM",
+            "armPanicMode": true,
+            "enterSafeMode": true,
+            "markShutDownIfOff": false,
+            "turnOffOnPanic": false,
+            "lowPowerCutOff": 350,
+            "turnOffOnLowPower": false,
+            "safeModePowerUpAlarm": 500,
+            "minPowerWarn": null,
+            "maxPowerWarn": null,
+            "minPower": 16000,
+            "maxPower": 23500,
+            "lockTimeoutInMilliseconds": 500,
+            "safeModeSensitive": false
+          },
+          {
+            "enabled": true,
+            "switchName": "ANUBIS_Ventil_EB",
+            "armPanicMode": true,
+            "enterSafeMode": true,
+            "markShutDownIfOff": false,
+            "turnOffOnPanic": false,
+            "lowPowerCutOff": 350,
+            "turnOffOnLowPower": false,
+            "safeModePowerUpAlarm": 500,
+            "minPowerWarn": null,
+            "maxPowerWarn": null,
+            "minPower": 16000,
+            "maxPower": 23500,
+            "lockTimeoutInMilliseconds": 500,
+            "safeModeSensitive": false
+          }
+        ],
+        "generalTriggers": [
+          {
+            "panic": [
+              "all"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          }
+        ],
+        "switchTriggers": [
+          {
+            "panic": [
+              "all"
+            ],
+            "id": [
+              "ANUBIS_MainSwitch",
+              "ANUBIS_Ventil_AM",
+              "ANUBIS_Ventil_EB"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          },
+          {
+            "panic": [
+              "all"
+            ],
+            "id": [
+              "ANUBIS_PC_Primary"
+            ],
+            "config": "tcPrimaryPCPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          },
+          {
+            "panic": [
+              "all"
+            ],
+            "id": [
+              "ANUBIS_PC_Secondary"
+            ],
+            "config": "tcSecondaryPCPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "$type": "usb",
+        "options": {
+          "sleepTimeInMilliseconds": 35000,
+          "alertTimeInMilliseconds": null,
+          "lockTimeoutInMilliseconds": 500,
+          "minPollerCountToArm": 3,
+          "autoSafeMode": true
+        },
+        "switches": [
+          {
+            "enabled": true,
+            "usbSwitchName": "ANUBIS_USB_Primary",
+            "armPanicMode": true,
+            "enterSafeMode": true,
+            "turnOffOnPanic": true,
+            "markShutDownIfOff": true,
+            "safeModeTurnOnAlarm": true,
+            "lockTimeoutInMilliseconds": 500,
+            "safeModeSensitive": true
+          }
+        ],
+        "generalTriggers": [
+          {
+            "panic": [
+              "all"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          }
+        ],
+        "switchTriggers": [
+          {
+            "panic": [
+              "SwitchNotFound",
+              "UnknownState",
+              "CommandTimeout",
+              "CommandError",
+              "InvalidState"
+            ],
+            "id": [
+              "*"
+            ],
+            "config": "tcPrimaryPCPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          },
+          {
+            "panic": [
+              "all"
+            ],
+            "id": [
+              "*"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "$type": "remoteFile",
+        "options": {
+          "sleepTimeInMilliseconds": 23000,
+          "alertTimeInMilliseconds": null,
+          "lockTimeoutInMilliseconds": 500,
+          "minPollerCountToArm": 3,
+          "autoSafeMode": null
+        },
+        "files": [
+          {
+            "enabled": true,
+            "name": "ANUBIS_RemoteFile_Secondary",
+            "path": "\\\\anubis-pc2\\anubis\\status.anubis",
+            "writeStateOnPanic": false,
+            "maxUpdateAgeInSeconds": 120,
+            "maxUpdateAgeInNegativeSeconds": null,
+            "stateCheck": true,
+            "stateTimestampCheck": true,
+            "lockTimeoutInMilliseconds": 500,
+            "fileAccessRetryMillisecondsMin": 100,
+            "fileAccessRetryMillisecondsMax": 500,
+            "fileAccessRetryCountMax": 10,
+            "mailPriority": false,
+            "safeModeSensitive": true
+          }
+        ],
+        "generalTriggers": [
+          {
+            "panic": [
+              "all"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          }
+        ],
+        "fileTriggers": [
+          {
+            "panic": [
+              "Panic"
+            ],
+            "id": [
+              "ANUBIS_RemoteFile_Secondary"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 1
+          },
+          {
+            "panic": [
+              "all"
+            ],
+            "id": [
+              "ANUBIS_RemoteFile_Secondary"
+            ],
+            "config": "tcSecondaryPCPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "$type": "localFile",
+        "options": {
+          "sleepTimeInMilliseconds": 23000,
+          "alertTimeInMilliseconds": null,
+          "lockTimeoutInMilliseconds": 500,
+          "minPollerCountToArm": 3,
+          "autoSafeMode": null
+        },
+        "files": [
+          {
+            "enabled": true,
+            "name": "ANUBIS_LocalFile_Primary",
+            "path": "C:\\shares\\anubis\\status.anubis",
+            "writeStateOnPanic": true,
+            "maxUpdateAgeInSeconds": 120,
+            "maxUpdateAgeInNegativeSeconds": null,
+            "stateCheck": true,
+            "stateTimestampCheck": true,
+            "lockTimeoutInMilliseconds": 500,
+            "fileAccessRetryMillisecondsMin": 100,
+            "fileAccessRetryMillisecondsMax": 500,
+            "fileAccessRetryCountMax": 10,
+            "mailPriority": false,
+            "safeModeSensitive": true
+          }
+        ],
+        "generalTriggers": [
+          {
+            "panic": [
+              "all"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          }
+        ],
+        "fileTriggers": [
+          {
+            "panic": [
+              "all"
+            ],
+            "id": [
+              "*"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "$type": "countdown",
+        "options": {
+          "sleepTimeInMilliseconds": 100,
+          "alertTimeInMilliseconds": null,
+          "lockTimeoutInMilliseconds": 500,
+          "minPollerCountToArm": 10,
+          "shutDownOnT0": false,
+          "autoSafeMode": true,
+          "countdownAutoSafeModeMinutes": 0,
+          "checkShutDownAfterMinutes": 5,
+          "countdownT0MinutesInFuture": 480,
+          "countdownT0RoundToNextHour": true
+        },
+        "mailingOptions": {
+          "enabled": false,
+          "checkForShutDown": true,
+          "checkForShutDownVerified": true,
+          "sendInfoMails": true,
+          "sendEmergencyMails": true,
+          "simulateMails": true,
+          "mailSettings_SmtpServer": "smtp-mail.outlook.com",
+          "mailSettings_Port": null,
+          "mailSettings_UseSsl": true,
+          "mailSettings_FromAddress": "echalone@hotmail.com",
+          "mailSettings_User": "echalone@hotmail.com",
+          "mailSettings_Password": null,
+          "mailAddress_Simulate": "echalone@hotmail.com",
+          "mailConfig_Info": [
+            "mailconfigs/infoExit.anubismail",
+            "mailconfigs/infoFriends.anubismail"
+          ],
+          "mailConfig_Emergency": [
+            "mailconfigs/EMS.anubismail"
+          ],
+          "countdownSendMailMinutes": 300
+        },
+        "generalTriggers": [
+          {
+            "panic": [
+              "all"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          }
+        ],
+        "countdownTriggers": [
+          {
+            "panic": [
+              "none"
+            ],
+            "id": [
+              "T0"
+            ],
+            "config": "tcCountdownTrigger",
+            "enabled": true,
+            "maxRepeats": 0
+          },
+          {
+            "panic": [
+              "all"
+            ],
+            "id": [
+              "MainController"
+            ],
+            "config": "tcPrimaryPCPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          },
+          {
+            "panic": [
+              "all"
+            ],
+            "id": [
+              "*"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          },
+          {
+            "panic": [
+              "CheckConditionViolation"
+            ],
+            "id": [
+              "SystemShutDownUnverified"
+            ],
+            "config": "",
+            "enabled": true,
+            "maxRepeats": 0
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "$type": "controller",
+        "options": {
+          "sleepTimeInMilliseconds": 100,
+          "alertTimeInMilliseconds": null,
+          "lockTimeoutInMilliseconds": 500,
+          "sendMailEarliestAfterMinutes": 180
+        },
+        "generalTriggers": [
+          {
+            "panic": [
+              "GeneralError"
+            ],
+            "config": "tcPrimaryPCPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          },
+          {
+            "panic": [
+              "Error"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 1
+          },
+          {
+            "panic": [
+              "all"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          }
+        ],
+        "pollerTriggers": [
+          {
+            "panic": [
+              "all"
+            ],
+            "id": [
+              "CountdownPoller"
+            ],
+            "config": "tcPrimaryPCPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          },
+          {
+            "panic": [
+              "all"
+            ],
+            "id": [
+              "*"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 1
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "$type": "general",
+        "generalTriggers": [
+          {
+            "panic": [
+              "all"
+            ],
+            "id": [
+              "*"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 10
+          }
+        ],
+        "fallbackTriggers": [
+          {
+            "panic": [
+              "all"
+            ],
+            "id": [
+              "*"
+            ],
+            "config": "tcGeneralPanic",
+            "enabled": true,
+            "maxRepeats": 0
+          }
+        ],
+        "enabled": true
+      }
+    ],
+    "triggerConfigs": [
+      {
+        "id": "tcCountdownTrigger",
+        "isFallback": false,
+        "repeatable": true,
+        "enabled": true,
+        "triggers": [
+          {
+            "$type": "device",
+            "deviceType": "ClewareUSB",
+            "id": "ANUBIS_USB_Primary",
+            "repeatable": true,
+            "enabled": true
+          },
+          {
+            "$type": "device",
+            "deviceType": "Fritz",
+            "id": "ANUBIS_MainSwitch",
+            "repeatable": true,
+            "enabled": true
+          },
+          {
+            "$type": "device",
+            "deviceType": "SwitchBot",
+            "id": "ANUBIS_SwitchBot",
+            "repeatable": true,
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "id": "tcGeneralPanic",
+        "isFallback": true,
+        "repeatable": true,
+        "enabled": true,
+        "triggers": [
+          {
+            "$type": "device",
+            "deviceType": "ClewareUSB",
+            "id": "ANUBIS_USB_Primary",
+            "repeatable": true,
+            "enabled": true
+          },
+          {
+            "$type": "device",
+            "deviceType": "Fritz",
+            "id": "ANUBIS_MainSwitch",
+            "repeatable": true,
+            "enabled": true
+          },
+          {
+            "$type": "device",
+            "deviceType": "SwitchBot",
+            "id": "ANUBIS_SwitchBot",
+            "repeatable": true,
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "id": "tcGeneralPanicOnce",
+        "isFallback": false,
+        "repeatable": false,
+        "enabled": true,
+        "triggers": [
+          {
+            "$type": "device",
+            "deviceType": "ClewareUSB",
+            "id": "ANUBIS_USB_Primary",
+            "repeatable": true,
+            "enabled": true
+          },
+          {
+            "$type": "device",
+            "deviceType": "Fritz",
+            "id": "ANUBIS_MainSwitch",
+            "repeatable": true,
+            "enabled": true
+          },
+          {
+            "$type": "device",
+            "deviceType": "SwitchBot",
+            "id": "ANUBIS_SwitchBot",
+            "repeatable": true,
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "id": "tcPrimaryPCPanic",
+        "isFallback": false,
+        "repeatable": false,
+        "enabled": true,
+        "triggers": [
+          {
+            "$type": "device",
+            "deviceType": "ClewareUSB",
+            "id": "ANUBIS_USB_Primary",
+            "repeatable": true,
+            "enabled": true
+          },
+          {
+            "$type": "device",
+            "deviceType": "Fritz",
+            "id": "ANUBIS_MainSwitch",
+            "repeatable": true,
+            "enabled": true
+          },
+          {
+            "$type": "device",
+            "deviceType": "SwitchBot",
+            "id": "ANUBIS_SwitchBot",
+            "repeatable": true,
+            "enabled": true
+          },
+          {
+            "$type": "delay",
+            "milliseconds": 10000,
+            "enabled": true
+          },
+          {
+            "$type": "device",
+            "deviceType": "OSShutdown",
+            "id": "windowspoweroff",
+            "repeatable": true,
+            "enabled": true
+          },
+          {
+            "$type": "delay",
+            "milliseconds": 30000,
+            "enabled": true
+          },
+          {
+            "$type": "device",
+            "deviceType": "Fritz",
+            "id": "ANUBIS_PC_Primary",
+            "repeatable": true,
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "id": "tcSecondaryPCPanic",
+        "isFallback": false,
+        "repeatable": true,
+        "enabled": true,
+        "triggers": [
+          {
+            "$type": "device",
+            "deviceType": "ClewareUSB",
+            "id": "ANUBIS_USB_Primary",
+            "repeatable": true,
+            "enabled": true
+          },
+          {
+            "$type": "device",
+            "deviceType": "Fritz",
+            "id": "ANUBIS_MainSwitch",
+            "repeatable": true,
+            "enabled": true
+          },
+          {
+            "$type": "device",
+            "deviceType": "SwitchBot",
+            "id": "ANUBIS_SwitchBot",
+            "repeatable": true,
+            "enabled": true
+          },
+          {
+            "$type": "delay",
+            "milliseconds": 45000,
+            "enabled": true
+          },
+          {
+            "$type": "device",
+            "deviceType": "Fritz",
+            "id": "ANUBIS_PC_Secondary",
+            "repeatable": true,
+            "enabled": true
+          }
+        ]
+      }
+    ]
+  }
+}

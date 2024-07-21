@@ -1,0 +1,86 @@
+{
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.File", "Serilog.Settings.Configuration", "Serilog.Expressions" ],
+    "MinimumLevel": "Verbose",
+    "WriteTo": [
+      {
+        "Name": "Logger",
+        "Args": {
+          "configureLogger": {
+            "WriteTo": [
+              {
+                "Name": "Async",
+                "Args": {
+                  "configure": [
+                    {
+                      "Name": "File",
+                      "Args": {
+                        "path": "Logs/main.log",
+                        "FileSizeLimitBytes": 104857600,
+                        "RollOnFileSizeLimit": true,
+                        "RetainedFileCountLimit": null,
+                        "shared": true,
+                        "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fffffff} [{Level:u3}] ({ThreadId:00000}) {SourceContext}{Scope:l}: {Message:lj}{NewLine}{Exception}"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "Name": "Logger",
+        "Args": {
+          "configureLogger": {
+            "Filter": [
+              {
+                "Name": "ByIncludingOnly",
+                "Args": {
+                  "expression": "(SourceContext not like '%.Api') or @l in ['Warning', 'Error', 'Fatal']"
+                }
+              }
+            ],
+            "WriteTo": [
+              {
+                "Name": "Async",
+                "Args": {
+                  "configure": [
+                    {
+                      "Name": "File",
+                      "Args": {
+                        "RestrictedToMinimumLevel": "Information",
+                        "path": "Logs/console.log",
+                        "shared": true,
+                        "outputTemplate": "{Timestamp:HH:mm:ss} [{Level:u3}] {SourceContext}: {Message:lj}{NewLine}"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "Enrich": [ "FromLogContext", "WithThreadId", "WithExceptionDetails" ],
+    "Destructure": [
+      {
+        "Name": "ToMaximumDepth",
+        "Args": { "maximumDestructuringDepth": 4 }
+      },
+      {
+        "Name": "ToMaximumStringLength",
+        "Args": { "maximumStringLength": 100 }
+      },
+      {
+        "Name": "ToMaximumCollectionCount",
+        "Args": { "maximumCollectionCount": 10 }
+      }
+    ],
+    "Properties": {
+      "Application": "ANUBIS"
+    }
+  }
+}
